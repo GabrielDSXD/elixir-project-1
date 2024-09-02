@@ -69,7 +69,7 @@ defmodule Main do
   defp listar(offset, func) do
     func.(offset)
 
-    IO.puts("Deseja listar mais 10? Sim ou nao")
+    IO.puts("Deseja listar mais 20? Sim ou nao")
         input = IO.gets("> ") |> String.trim() |> String.downcase()
     case input do
       "sim" -> listar(offset+10, func)
