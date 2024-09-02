@@ -1,10 +1,10 @@
-defmodule GitHub do
+defmodule ApiService do
   use HTTPoison.Base
 
-  @url "https://api.github.com/repos/elixir-lang/elixir/issues"
+  @url "https://pokeapi.co/api/v2/"
 
-  def fetch_data() do
-    HTTPoison.get(@url)
+  def fetch_data(query \\ "") do
+    HTTPoison.get(@url <> query)
     |> processa_resposta
   end
 

@@ -28,6 +28,6 @@ defmodule Projeto1.MixProject do
   end
 
   defp escript_config do
-    [main_module: Api]
+    [main_module: Main]
   end
 end
