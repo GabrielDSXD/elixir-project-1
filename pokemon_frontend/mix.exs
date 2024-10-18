@@ -18,8 +18,8 @@ defmodule PokemonFrontend.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      extra_applications: [:logger],
-      mod: {Projeto1.Application, []}
+      mod: {PokemonFrontend.Application, []},
+      extra_applications: [:logger, :runtime_tools]
     ]
   end
 
