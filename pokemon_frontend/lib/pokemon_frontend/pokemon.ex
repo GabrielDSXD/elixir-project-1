@@ -5,17 +5,7 @@ defmodule Pokemon do
 
 
   defp show_result({:ok, json}) do
-    {:ok, result}  = Poison.decode(json)
-    show_list(result["results"], 0)
-  end
-
-  defp show_list([], _), do: nil
-  defp show_list([i | rest], index) do
-    name = i["name"]
-
-    IO.puts "#{index}" <> " | "  <>  name
-
-    show_list(rest, index+1)
+    Poison.decode(json)
   end
 
   defp show_pokemon({:error, _}) do
@@ -24,15 +14,7 @@ defmodule Pokemon do
 
 
   defp show_pokemon({:ok, json}) do
-    {:ok, result}  = Poison.decode(json)
-    name = result["name"]
-    id = result["id"]
-    height = result["height"]
-    weight = result["weight"]
-    order =result["order"]
-
-    IO.puts "#{id}" <> " | "  <> name <> " | "  <>  "Height: #{height}"  <> " | "  <>  "Weight: #{weight}"  <> " | "  <>   " Order: #{order}"
-    result
+    Poison.decode(json)
   end
 
   defp show_habitat({:error, _}) do
@@ -40,16 +22,7 @@ defmodule Pokemon do
   end
 
   defp show_habitat({:ok, json}) do
-    {:ok, result}  = Poison.decode(json)
-    name = result["name"]
-    id = result["id"]
-    IO.puts "HABITAT"
-
-    IO.puts "#{id}" <> " | "  <> name
-
-    IO.puts "LISTA DE POKEMONS ENCONTRADOS NESSE HABITAT:"
-
-    show_list(result["pokemon_species"], 0)
+    Poison.decode(json)
   end
 
   defp show_colors({:error, _}) do
@@ -58,15 +31,7 @@ defmodule Pokemon do
 
   defp show_colors({:ok, json}) do
     {:ok, result}  = Poison.decode(json)
-    name = result["name"]
-    id = result["id"]
-    IO.puts "COR"
-
-    IO.puts "#{id}" <> " | "  <> name
-
-    IO.puts "LISTA DE POKEMONS COM A RESPECTIVA COR:"
-
-    show_list(result["pokemon_species"], 0)
+    result
   end
 
    defp show_evolution({:error, _}) do
@@ -77,7 +42,7 @@ defmodule Pokemon do
   defp show_evolution({:ok, json}) do
     {:ok, result}  = Poison.decode(json)
 
-    find_species_names(result) |> Enum.each(&IO.puts/1)
+    find_species_names(result)
   end
 
   defp find_species_names(%{"chain" => chain}) do

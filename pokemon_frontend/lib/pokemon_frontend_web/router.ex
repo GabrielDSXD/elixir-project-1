@@ -18,7 +18,10 @@ defmodule PokemonFrontendWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/pokemon/:idOrName", PageController, :getOnePokemon
+    get "/pokemon-habitat/:habitat", PageController, :searchByHabitats
   end
+
 
   # Other scopes may use custom stacks.
   # scope "/api", PokemonFrontendWeb do
