@@ -55,7 +55,6 @@ defmodule Pokemon do
     IO.puts "Ocorreu um erro ao mostrar as cores"
   end
 
-
   defp show_colors({:ok, json}) do
     {:ok, result}  = Poison.decode(json)
     name = result["name"]
@@ -87,8 +86,6 @@ defmodule Pokemon do
   defp find_species_names_from_chain(%{"species" => %{"name" => name}, "evolves_to" => evolves_to}) do
     [name] ++ Enum.flat_map(evolves_to, &find_species_names_from_chain/1)
   end
-
-  defp find_species_names_from_chain(_), do: []
 
 
   def listAll(offset \\ 0) do
