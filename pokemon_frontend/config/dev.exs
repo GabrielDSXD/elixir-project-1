@@ -3,7 +3,7 @@ import Config
 # Configure your database
 config :pokemon_frontend, PokemonFrontend.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "admin",
   hostname: "localhost",
   database: "postgres",
   stacktrace: true,

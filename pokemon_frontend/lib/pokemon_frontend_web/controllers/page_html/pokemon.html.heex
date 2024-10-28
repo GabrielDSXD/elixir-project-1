@@ -78,16 +78,52 @@
     display: inline-block;
     font-weight: bold;
   }
+
+  .header {
+            background-color: #333;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header .home-button {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            background-color: #ff3b30;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .header .search-field {
+            padding: 8px;
+            border-radius: 5px;
+            border: 2px solid #ccc;
+            width: 200px;
+        }
 </style>
+
+<div class="header">
+  <a href="/" class="home-button">Home</a>
+  <div class="pokemon-buttons">
+    <div style="display: flex; justify-content: center;">
+      <button id="first-pokemon-button" class="btn btn-primary">1º Pokémon</button>
+      <button id="random-pokemon-button" class="btn btn-secondary">Pokémon Aleatório</button>
+    </div>
+</div>
+<input type="text" class="search-field" id="search-field" placeholder="Digite o ID do Pokémon...">
+</div>
 
 <div class="pokedex">
 
   <div class="pokemon-info">
   <h1><%= @pokemon["name"] %></h1>
-  <p>Height: <%= @pokemon["height"] %></p>
-  <p>Weight: <%= @pokemon["weight"] %></p>
-  <p>Order: <%= @pokemon["order"] %></p>
-  <p>Base Experience: <%= @pokemon["base_experience"] %></p>
+  <p>Altura: <%= @pokemon["height"] %> m</p>
+  <p>Peso: <%= @pokemon["weight"] %> kg</p>
+  <p>Ordem: <%= @pokemon["order"] %></p>
+  <p>Experiência Base: <%= @pokemon["base_experience"] %></p>
   
   <!-- Corrigindo a tag <img> -->
   <img src={@pokemon["sprites"]["front_default"]} alt="Pokemon Image">
@@ -129,6 +165,32 @@
       // Redireciona para a nova URL
       window.location.href = newUrl;
     });
+
+    // Função para ir para um Pokémon aleatório
+    document.getElementById("random-pokemon-button").addEventListener("click", function() {
+      const randomId = Math.floor(Math.random() * 1025) + 1; // Gera um número aleatório entre 1 e 1000
+      const newUrl = `/pokemon/${randomId}`;
+      window.location.href = newUrl;
+  });
+
+  // Função para ir para o 1º Pokémon
+  document.getElementById("first-pokemon-button").addEventListener("click", function() {
+      window.location.href = "/pokemon/1";
+  });
+
+  // Adiciona um evento ao campo de texto para redirecionar ao pressionar "Enter"
+  document.getElementById("search-field").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") { // Verifica se a tecla pressionada foi "Enter"
+        const pokemonId = event.target.value.trim(); // Obtém o valor inserido
+
+        // Verifica se o valor é um número e está entre 1 e 1000
+        if (pokemonId && !isNaN(pokemonId) && pokemonId >= 1 && pokemonId <= 1025) {
+            window.location.href = `/pokemon/${pokemonId}`;
+        } else {
+            alert("Por favor, insira um número válido entre 1 e 1025.");
+        }
+    }
+});
   </script>
 </div>
 </div>

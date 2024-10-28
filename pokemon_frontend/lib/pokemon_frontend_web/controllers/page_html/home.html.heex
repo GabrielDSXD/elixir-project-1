@@ -1,2 +1,146 @@
 <.flash_group flash={@flash} />
-<div>HELLO WORLD</div>
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('https://assets.pokemon.com/static2/_ui/img/chrome/container_bg.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #333;
+    }
+  
+    .pokedex {
+      background-color: #ff3b30;
+      border-radius: 15px;
+      border: 4px solid #000;
+      width: 500px;
+      margin: 50px auto;
+      padding: 20px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+  
+    .pokedex h1 {
+      text-align: center;
+      color: #000;
+      font-weight: bolder;
+      text-transform: capitalize;
+    }
+  
+    .pokedex img {
+      display: block;
+      margin: 0 auto;
+      width: 150px;
+      height: 150px;
+    }
+  
+    .pokemon-info {
+      background-color: #f1f1f1;
+      border: 2px solid #000;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 10px 0;
+    }
+  
+    .pokemon-info p {
+      margin: 8px 0;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  
+    .pokemon-buttons {
+      text-align: center;
+    }
+  
+    .pokemon-buttons button {
+      background-color: #fff;
+      border: 2px solid #000;
+      padding: 10px 20px;
+      margin: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 10px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    .pokemon-buttons button:hover {
+      background-color: #f0f0f0;
+    }
+  
+    .pokemon-buttons a {
+      text-decoration: none;
+      color: white;
+      background-color: #000;
+      padding: 10px 20px;
+      border-radius: 10px;
+      margin: 5px;
+      display: inline-block;
+      font-weight: bold;
+    }
+
+    .header {
+            background-color: #333;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header .home-button {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            background-color: #ff3b30;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .header .search-field {
+            padding: 8px;
+            border-radius: 5px;
+            border: 2px solid #ccc;
+            width: 200px;
+        }
+</style>
+<div class="header">
+    <a href="/" class="home-button">Home</a>
+    <div class="pokemon-buttons">
+        <div style="display: flex; justify-content: center;">
+            <button id="first-pokemon-button" class="btn btn-primary">1º Pokémon</button>
+            <button id="random-pokemon-button" class="btn btn-secondary">Pokémon Aleatório</button> 
+        </div>
+    </div>
+    <input type="text" class="search-field" id="search-field" placeholder="Digite o ID do Pokémon...">
+</div>
+<div>MAIN</div>
+
+
+<script>
+    // Função para ir para um Pokémon aleatório
+    document.getElementById("random-pokemon-button").addEventListener("click", function() {
+        const randomId = Math.floor(Math.random() * 1025) + 1; // Gera um número aleatório entre 1 e 1000
+        const newUrl = `/pokemon/${randomId}`;
+        window.location.href = newUrl;
+    });
+
+    // Função para ir para o 1º Pokémon
+    document.getElementById("first-pokemon-button").addEventListener("click", function() {
+        window.location.href = "/pokemon/1";
+    });
+
+    // Adiciona um evento ao campo de texto para redirecionar ao pressionar "Enter"
+    document.getElementById("search-field").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") { // Verifica se a tecla pressionada foi "Enter"
+            const pokemonId = event.target.value.trim(); // Obtém o valor inserido
+
+            // Verifica se o valor é um número e está entre 1 e 1000
+            if (pokemonId && !isNaN(pokemonId) && pokemonId >= 1 && pokemonId <= 1025) {
+                window.location.href = `/pokemon/${pokemonId}`;
+            } else {
+                alert("Por favor, insira um número válido entre 1 e 1025.");
+            }
+        }
+    });
+</script>
