@@ -120,8 +120,8 @@
 
   <div class="pokemon-info">
   <h1><%= @pokemon["name"] %></h1>
-  <p>Altura: <%= @pokemon["height"] %> m</p>
-  <p>Peso: <%= @pokemon["weight"] %> kg</p>
+  <p>Altura: <%= Float.round(@pokemon["height"] * 0.1, 1) %> m</p>
+  <p>Peso: <%= Float.round(@pokemon["weight"] * 0.1, 1) %> kg</p>
   <p>Ordem: <%= @pokemon["order"] %></p>
   <p>Experiência Base: <%= @pokemon["base_experience"] %></p>
   

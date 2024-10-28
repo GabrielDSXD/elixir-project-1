@@ -5,6 +5,7 @@ defmodule Pokemon do
 
 
   defp show_result({:ok, json}) do
+    IO.inspect(json, label: "JSON Recebido (show_result)")
     Poison.decode(json)
   end
 
@@ -14,6 +15,7 @@ defmodule Pokemon do
 
 
   defp show_pokemon({:ok, json}) do
+    IO.inspect(json, label: "JSON Recebido (show_pokemon)")
     Poison.decode(json)
   end
 
@@ -22,6 +24,7 @@ defmodule Pokemon do
   end
 
   defp show_habitat({:ok, json}) do
+    IO.inspect(json, label: "JSON Recebido (show_habitat)")
     Poison.decode(json)
   end
 
