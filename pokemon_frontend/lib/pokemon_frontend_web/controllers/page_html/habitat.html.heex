@@ -120,12 +120,44 @@
     font-size: 24px;
     font-weight: bold;
     color: #333;
+    text-transform: capitalize;
   }
 
   .habitat p {
     font-size: 16px;
     color: #666;
     text-transform: capitalize;
+  }
+
+  .pokemon-buttons {
+    text-align: center;
+  }
+
+  .pokemon-buttons button {
+    background-color: #fff;
+    border: 2px solid #000;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .pokemon-buttons button:hover {
+    background-color: #f0f0f0;
+  }
+
+  .pokemon-buttons a {
+    text-decoration: none;
+    color: white;
+    background-color: #000;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 5px;
+    display: inline-block;
+    font-weight: bold;
   }
 </style>
 <div class="header">
@@ -135,8 +167,8 @@
 
 <div>
   <div class="habitat">
-    <h1>ID: <%= @habitat["id"] %></h1>
-    <p>name: <%= @habitat["name"] %></p>
+    <h1>Name: <%= @habitat["name"] %></h1>
+    <p>ID: <%= @habitat["id"] %></p>
   </div>
 
   <div class="pokemon-cards">
@@ -152,7 +184,57 @@
   </div>
 </div>
 
+<div class="pokemon-buttons">
+  <div style="display: flex; justify-content: center; margin-top: 0px">
+    <button
+      phx-click="prev_page"
+      id="prev-page-button"
+      class="btn btn-secondary"
+    >
+      Voltar Página
+    </button>
+    <button
+      phx-click="next_page"
+      id="next-page-button"
+      class="btn btn-primary"
+    >
+      Próxima Página
+    </button>
+  </div>
+</div>
+
 <script>
+  // Função para avançar para a próxima página
+  document
+  .getElementById("next-page-button")
+  .addEventListener("click", function () {
+    // Obtém o ID atual da URL
+    const currentUrl = window.location.href;
+    const currentId = parseInt(currentUrl.split("/").pop());
+
+    // Incrementa o ID e redireciona para a próxima página
+    const nextId = currentId + 1;
+    const newUrl = currentUrl.replace(/\/\d+$/, `/${nextId}`);
+
+    // Redireciona para a nova URL
+    window.location.href = newUrl;
+  });
+
+// Função para voltar para a página anterior
+document
+  .getElementById("prev-page-button")
+  .addEventListener("click", function () {
+    // Obtém o ID atual da URL
+    const currentUrl = window.location.href;
+    const currentId = parseInt(currentUrl.split("/").pop());
+
+    // Decrementa o ID (mas não deixa ir abaixo de 1)
+    const prevId = currentId > 1 ? currentId - 1 : 1;
+    const newUrl = currentUrl.replace(/\/\d+$/, `/${prevId}`);
+
+    // Redireciona para a nova URL
+    window.location.href = newUrl;
+  });
   // Adiciona um evento ao campo de texto para redirecionar ao pressionar "Enter"
   document.getElementById("search-field").addEventListener("keypress", function (event) {
     if (event.key === "Enter") { // Verifica se a tecla pressionada foi "Enter"

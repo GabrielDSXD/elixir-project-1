@@ -153,6 +153,9 @@
     <button id="random-pokemon-button" class="btn btn-secondary">
       Pokémon Aleatório
     </button>
+    <button id="random-habitat-button" class="btn btn-secondary">
+      Habitat Aleatório
+    </button>
   </div>
 </div>
 
@@ -163,6 +166,14 @@
     .addEventListener("click", function () {
       const randomId = Math.floor(Math.random() * 1025) + 1; // Gera um número aleatório entre 1 e 1000
       const newUrl = `/pokemon/${randomId}`;
+      window.location.href = newUrl;
+    });
+
+  document
+    .getElementById("random-habitat-button")
+    .addEventListener("click", function () {
+      const randomId = Math.floor(Math.random() * 9) + 1; // Gera um número aleatório entre 1 e 1000
+      const newUrl = `/pokemon-habitat/${randomId}`;
       window.location.href = newUrl;
     });
 
