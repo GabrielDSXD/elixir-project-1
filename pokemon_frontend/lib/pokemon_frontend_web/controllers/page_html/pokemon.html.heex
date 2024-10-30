@@ -112,6 +112,45 @@
     border: 2px solid #ccc;
     width: 200px;
   }
+
+  .pokemon-moves {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .moves-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .move-card {
+    background-color: #f2f2f2;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding: 10px 15px;
+    width: 180px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    transition: transform 0.2s;
+  }
+
+  .move-card:hover {
+    transform: scale(1.05);
+  }
+
+  .move-card p {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+
+  .pokemon-moves h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+  }
 </style>
 
 <div class="header">
@@ -144,6 +183,25 @@
         <img src={@pokemon["sprites"]["front_shiny"]} alt="Pokemon Image">
       </div>
     </div>
+
+    <div class="pokemon-moves">
+      <h2>Primeiros 4 Movimentos Aprendidos</h2>
+      <div class="moves-container">
+        <%= for move <- @pokemon["moves"] |> Enum.filter(fn m ->
+        hd(m["version_group_details"])["level_learned_at"] > 0 end) |>
+        Enum.sort_by(fn m -> hd(m["version_group_details"])["level_learned_at"]
+        end) |> Enum.take(4) do %>
+        <div class="move-card">
+          <p><strong>Movimento:</strong> <%= move["move"]["name"] %></p>
+          <p>
+            <strong>Nível Aprendido:</strong> <%=
+            hd(move["version_group_details"])["level_learned_at"] %>
+          </p>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
     <div class="pokemon-buttons">
       <a href="/pokemon-habitat/1">Ir para o Habitat</a>
 
