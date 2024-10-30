@@ -185,7 +185,7 @@
     </div>
 
     <div class="pokemon-moves">
-      <h2>Primeiros 4 Movimentos Aprendidos</h2>
+      <h1 style="margin-bottom: 20px">Primeiros 4 Movimentos Aprendidos</h1>
       <div class="moves-container">
         <%= for move <- @pokemon["moves"] |> Enum.filter(fn m ->
         hd(m["version_group_details"])["level_learned_at"] > 0 end) |>
