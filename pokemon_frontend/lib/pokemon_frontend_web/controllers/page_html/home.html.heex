@@ -91,7 +91,7 @@
     color: white;
     text-decoration: none;
     font-weight: bold;
-    background-color: #ff3b30;
+    background-color: #db1e2e;
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 16px;
@@ -105,7 +105,7 @@
   }
 
   .welcome-section {
-    background-color: #ff3b30;
+    background-color: #db1e2e;
     /* Cor de fundo amarela para chamar atenção */
     padding: 20px;
     border-radius: 15px;
@@ -145,6 +145,9 @@
     veja características únicas de cada um!
   </p>
 </div>
+<div style="justify-content: center; display: flex">
+  <img src="https://i.imgur.com/N5S8kyb.png" />
+</div>
 <div class="pokemon-buttons">
   <div style="display: flex; justify-content: center">
     <button id="first-pokemon-button" class="btn btn-primary">
@@ -152,6 +155,9 @@
     </button>
     <button id="random-pokemon-button" class="btn btn-secondary">
       Pokémon Aleatório
+    </button>
+    <button id="first-habitat-button" class="btn btn-primary">
+      1º Habitat
     </button>
     <button id="random-habitat-button" class="btn btn-secondary">
       Habitat Aleatório
@@ -182,6 +188,12 @@
     .getElementById("first-pokemon-button")
     .addEventListener("click", function () {
       window.location.href = "/pokemon/1";
+    });
+
+  document
+    .getElementById("first-habitat-button")
+    .addEventListener("click", function () {
+      window.location.href = "/pokemon-habitat/1";
     });
 
   // Adiciona um evento ao campo de texto para redirecionar ao pressionar "Enter"
